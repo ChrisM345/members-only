@@ -1,6 +1,7 @@
 module.exports = {
   get: (req, res) => {
-    res.render("indexView", { title: "Members Only" });
+    console.log("post");
+    res.redirect("/");
   },
   getSignup: (req, res) => {
     res.render("signupView", { title: "Signup Form" });
