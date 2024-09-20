@@ -3,6 +3,6 @@ module.exports = {
     res.render("indexView", { title: "Members Only" });
   },
   getSignup: (req, res) => {
-    res.render("signupView", { title: "Signup Form" });
+    res.render("signupView", { title: "Signup Form", data: {} });
   },
 };
