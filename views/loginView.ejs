@@ -7,6 +7,9 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <% if (error) {%>
+    <h1><%=error%></h1>
+    <%}%>
     <div class="loginForm">
       <%- include("partials/errors.ejs") %>
       <form action="/login" method="POST">

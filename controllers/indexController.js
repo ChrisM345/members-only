@@ -1,3 +1,5 @@
+const auth = require("../auth");
+
 const get = (req, res) => {
   res.render("indexView", { title: "Members Only" });
 };
@@ -6,12 +8,20 @@ const getSignup = (req, res) => {
 };
 
 const getLogin = (req, res) => {
-  res.render("loginView", { title: "Login", data: {} });
+  let err = req.session.messages;
+  if (req.session.messages) {
+    err = req.session.messages.pop();
+  }
+  res.render("loginView", { title: "Login", data: {}, error: err });
 };
 
-const userLogin = (req, res) => {
+const userLogin = (req, res, next) => {
   console.log("testing login");
-  res.redirect("/login");
+  auth.passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureMessage: true,
+  })(req, res, next);
 };
 
 module.exports = {
