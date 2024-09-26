@@ -11,7 +11,8 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Email not found in database. Please sign up." });
       }
-      if (user.password !== password) {
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
         console.log(user);
         return done(null, false, { message: "Incorrect password" });
       }

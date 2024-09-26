@@ -1,11 +1,16 @@
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
-const { createUser } = require("../db/queries");
+const { createUser, checkEmail } = require("../db/queries");
 const auth = require("../auth");
 
 const passwordLengthErr = "must be between 4 and 16 characters.";
 const validatePassword = [
   body("password").trim().isLength({ min: 4, max: 10 }).withMessage(`Password ${passwordLengthErr}`),
+  body("email").custom(async (value) => {
+    if (await checkEmail(value)) {
+      throw new Error("E-mail already in use");
+    }
+  }),
 ];
 
 const createLogin = [
