@@ -7,10 +7,21 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <% if (locals.user) {%>
+    <h1>Welcome Back <%= user.first_name %></h1>
+    <% if (user.member_status) { %>
+    <h2>Member Status: True</h2>
+    <%}%>
+    <a href="/secretMember">Secret Member Signup</a><br />
+    <a href="/logout">Log Out</a>
+    <%} else { %>
     <p>
+      <a href="/secretMember">Secret Member Signup</a><br />
+      <a href="/newMessage">New Message</a><br />
       <a href="/login">Login</a><br />
       <a href="/signup">Sign Up</a>
     </p>
     <h2>All Messages</h2>
+    <%}%>
   </body>
 </html>
