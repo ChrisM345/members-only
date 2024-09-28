@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="messageForm">
+      <%- include("partials/errors.ejs") %>
+      <form action="/login" method="POST">
+        <label for="title">Message Title: </label>
+        <input id="title" name="title" type="text" required />
+        <label for="message">Message: </label>
+        <input id="message" name="message" type="text" />
+        <button>Post Message</button>
+      </form>
+    </div>
+  </body>
+</html>

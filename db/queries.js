@@ -24,9 +24,16 @@ async function checkEmail(email) {
   console.log(rows[0]);
   return rows[0];
 }
+
+async function setMemberStatus(id) {
+  console.log(id);
+  await pool.query("UPDATE users SET member_status = true WHERE id = $1", [id]);
+}
+
 module.exports = {
   createUser,
   checkLogin,
   getUserById,
   checkEmail,
+  setMemberStatus,
 };
