@@ -8,20 +8,28 @@
   <body>
     <h1><%= title %></h1>
     <% if (locals.user) {%>
-    <h1>Welcome Back <%= user.first_name %></h1>
+    <h2>Welcome Back <%= user.first_name %></h2>
     <% if (user.member_status) { %>
-    <h2>Member Status: True</h2>
+    <p>Member Status: True</p>
     <%}%>
-    <a href="/secretMember">Secret Member Signup</a><br />
-    <a href="/logout">Log Out</a>
+    <ul>
+      <li><a href="/secretMember">Secret Member Signup</a></li>
+      <li><a href="/newMessage">New Message</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
     <%} else { %>
-    <p>
-      <a href="/secretMember">Secret Member Signup</a><br />
-      <a href="/newMessage">New Message</a><br />
-      <a href="/login">Login</a><br />
-      <a href="/signup">Sign Up</a>
-    </p>
-    <h2>All Messages</h2>
+    <ul>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Sign Up</a></li>
+    </ul>
     <%}%>
+    <h2>All Messages</h2>
+    <% data.forEach((message) => { %>
+    <p>
+      User: <% if (locals.user && user.member_status) { %> Show User <% } else { %> Anonymous <%}%>
+      <br />Title: <%= message.title%><br />Message: <%= message.text%><br />Timestamp: <%= message.created_at%>
+      <br />
+    </p>
+    <% }) %>
   </body>
 </html>
