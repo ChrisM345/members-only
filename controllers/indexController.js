@@ -1,12 +1,12 @@
 const auth = require("../auth");
 const { body, validationResult } = require("express-validator");
-const { setMemberStatus } = require("../db/queries");
+const { setMemberStatus, getMessages } = require("../db/queries");
 
 const validateSecret = [body("secret").trim().equals("verysecret").withMessage("Incorrect Secret")];
 
 const get = async (req, res) => {
   console.log(await req.user);
-  res.render("indexView", { title: "Members Only", user: await req.user });
+  res.render("indexView", { title: "Members Only", user: await req.user, data: await getMessages() });
 };
 const getSignup = (req, res) => {
   res.render("signupView", { title: "Signup Form", data: {} });

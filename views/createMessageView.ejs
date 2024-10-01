@@ -9,7 +9,7 @@
     <h1><%= title %></h1>
     <div class="messageForm">
       <%- include("partials/errors.ejs") %>
-      <form action="/login" method="POST">
+      <form action="/newMessage/postMessage" method="POST">
         <label for="title">Message Title: </label>
         <input id="title" name="title" type="text" required />
         <label for="message">Message: </label>
