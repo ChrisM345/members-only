@@ -5,7 +5,6 @@ const { setMemberStatus, getMessages } = require("../db/queries");
 const validateSecret = [body("secret").trim().equals("verysecret").withMessage("Incorrect Secret")];
 
 const get = async (req, res) => {
-  console.log(await req.user);
   res.render("indexView", { title: "Members Only", user: await req.user, data: await getMessages() });
 };
 const getSignup = (req, res) => {
@@ -21,7 +20,6 @@ const getLogin = (req, res) => {
 };
 
 const userLogin = (req, res, next) => {
-  console.log("testing login");
   auth.passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -52,10 +50,6 @@ const postSecretSignup = [
         errors: errors.array(),
       });
     }
-    console.log("correct secret");
-    console.log(req.session.passport.user);
-    console.log(req.session.user);
-    console.log("correct secret");
     setMemberStatus(req.session.passport.user);
     res.redirect("/");
   },

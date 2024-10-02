@@ -8,25 +8,21 @@ async function createUser(first_name, last_name, email, hashedPassword) {
 }
 
 async function checkLogin(email, password) {
-  console.log("checklogin");
   const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
   return rows[0];
 }
 
 async function getUserById(id) {
-  console.log("getid");
   const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
   return rows[0];
 }
 
 async function checkEmail(email) {
   const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-  console.log(rows[0]);
   return rows[0];
 }
 
 async function setMemberStatus(id) {
-  console.log(id);
   await pool.query("UPDATE users SET member_status = true WHERE id = $1", [id]);
 }
 
@@ -40,7 +36,9 @@ async function saveMessage(id, title, text) {
 }
 
 async function getMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages");
+  const { rows } = await pool.query(
+    "SELECT first_name, last_name, title, text, messages.created_at FROM messages INNER JOIN users ON users.id = messages.user_id ORDER BY messages.id DESC;"
+  );
   return rows;
 }
 

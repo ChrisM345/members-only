@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -26,7 +27,8 @@
     <h2>All Messages</h2>
     <% data.forEach((message) => { %>
     <p>
-      User: <% if (locals.user && user.member_status) { %> Show User <% } else { %> Anonymous <%}%>
+      User: <% if (locals.user && user.member_status) { %> <%= message.first_name %> <%= message.last_name %> <% } else
+      { %> Anonymous <%}%>
       <br />Title: <%= message.title%><br />Message: <%= message.text%><br />Timestamp: <%= message.created_at%>
       <br />
     </p>
